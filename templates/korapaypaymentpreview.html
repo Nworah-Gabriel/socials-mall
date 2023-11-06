@@ -245,7 +245,7 @@
             amount: {{payment.amount}}, 
             currency: "NGN",
             customer: {
-              name: "Ejike Sylva",
+              name: "{{request.user.first_name}} {{request.user.last_name}}",
               email: "{{request.user.email}}"
             },
             notification_url: "https://socialsmall.net/korapay/webhook/"
