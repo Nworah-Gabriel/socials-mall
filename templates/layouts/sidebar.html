@@ -1,0 +1,136 @@
+{% load static %}
+<div id="sidebar" class="sidebar">
+                <div class="sidebar-content">
+                    <div class="sidebar-logo">
+                        <a href="#" class="logo-link">
+                            <img src="{% static 'images/logo3.png' %}" alt="Socials Mall" title="Socials Mall">
+                        </a>
+                    </div>
+                    <div class="sidebar-body">
+                        <div class="sidebar-wrapper">
+                            <div class="sidebar-balance">
+                                <div class="user_avatar">
+                                    <img src="https://res.cloudinary.com/dsnmt7vn1/image/upload/v1670929805/famsup-image/users_avatar_vmgphf.png"
+                                        class="img-fluid" alt="">
+                                </div>
+                                <div class="content">
+                                    <p class="s-balance">NGN {{balance}}</p>
+                                    <a href="{% url 'core:addfunds' %}" class="s-fill-balance">
+                                        <span>Fill Balance</span>
+                                        <i class="ri-arrow-right-line ms-1"></i>
+                                    </a>
+                                </div>
+                            </div><!-- balance -->
+                            <div class="sidebar-menu-wrapper">
+                                <ul class="sidebar-menu">
+                                    <li class="s-menu-item  {% if page == 'dashboard' %}active{% endif %}">
+                                        <a href="/" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="far fa-box-heart"></i>
+                                            </div>
+                                            <div class="text">
+                                                New order
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- <li class="s-menu-item {% if page == 'services' %}active{% endif %}">
+                                        <a href="#" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-list-check-2"></i>
+                                            </div>
+                                            <div class="text">
+                                                Services
+                                            </div>
+                                        </a>
+                                    </li> -->
+                                    <li class="s-menu-item {% if page == 'orders' %}active{% endif %}">
+                                        <a href="{% url 'core:orders' %}" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-shopping-basket-line"></i>
+                                            </div>
+                                            <div class="text">
+                                                Orders
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="s-menu-item {% if page == 'accounts' %}active{% endif %}">
+                                        <a href="{% url 'core:handles' %}" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-account-box-fill"></i>
+                                            </div>
+                                            <div class="text">
+                                                Accounts
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="s-menu-item {% if page == 'purchase history' %}active{% endif %}">
+                                        <a href="{% url 'core:purchasehistory' %}" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-chat-history-fill"></i>
+                                            </div>
+                                            <div class="text">
+                                                Purchase History
+                                            </div>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="s-menu-item {% if page == 'delivery' %}active{% endif %}">
+                                        <a href="{% url 'core:delivery' %}" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-truck-line"></i>
+                                            </div>
+                                            <div class="text">
+                                                Delivery
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="s-menu-item {% if page == 'addfunds' %}active{% endif %}">
+                                        <a href="{% url 'core:addfunds' %}" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-exchange-dollar-line"></i>
+                                            </div>
+                                            <div class="text">
+                                                Add funds
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="s-menu-item ">
+                                        <a href="mailto:contactsocialsmall@gmail.com" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-chat-1-line"></i>
+                                            </div>
+                                            <div class="text">
+                                                Contact Us
+                                            </div>
+                                        </a>
+                                    </li>
+
+
+                                    <!-- <li class="s-menu-item ">
+                                        <a href="#" class="s-menu-link">
+                                            <div class="icon">
+                                                <i class="ri-customer-service-2-line"></i>
+                                            </div>
+                                            <div class="text">
+                                                Tickets
+                                            </div>
+                                        </a>
+                                    </li> -->
+
+                                </ul>
+                            </div><!-- ./sidebar-menu-wrapper -->
+                            <div class="sidebar-signout-wrapper">
+                                <a href="https://t.me/Socialsmallchn"
+                                    class="btn btn-secondary btn-border btn-block d-flex align-items-center justify-content-center">
+                                    <span>Join Telegram Channel</span>
+                                </a>
+                                <a href="{% url 'account:logout' %}"
+                                    class="btn btn-secondary btn-border btn-block d-flex align-items-center justify-content-center">
+                                    <i class="ri-shut-down-line me-3"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div><!-- sidebar-wrapper -->
+                    </div><!-- ./sidebar-body  -->
+                </div>
+            </div><!-- ./sidebar -->

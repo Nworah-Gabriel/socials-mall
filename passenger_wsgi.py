@@ -1,0 +1,1 @@
+from socialsmall.wsgi import application

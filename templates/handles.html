@@ -1,0 +1,434 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Social Media Handles</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+				  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+				  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+				  <![endif]-->
+
+  <!-- CDN CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+  <!-- //.CDN CSS Files -->
+
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'cdn.mypanel.link/hj0v8i/0gqde1af730nbh57.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'cdn.mypanel.link/hj0v8i/15xb4ubsywrfrzg5.css' %}">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.mypanel.link/libs/bootstrap-datetimepicker/4.17.47/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.mypanel.link/css/font-awesome/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.mypanel.link/global/c3gyq3shygmabbke.css">
+</head>
+
+<body>
+  <div class="dashboard-root">
+    <div class="dashboard-root">
+      <button class="sidebar-toggle" id="sidebar-toggle" onclick="dashboardMenuToggle()">
+        <i class="ri-menu-line menu-bar"></i>
+        <i class="ri-close-line close-i"></i>
+      </button>
+      {% include 'layouts/sidebar.html' %}
+      <div id="header" class="d-header">
+        <div class="container-fluid">
+          <div class="row align-items-center head-row">
+            <div class="col-auto d-none d-md-block d-xxl-none col-item">
+              <div style="width:56px;"></div>
+            </div>
+            <div class="col col-page-title col-item">
+              <h1 class="page-title" id="pageTitleHeader">Socials Mall</h1>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- ./d-header -->
+      <!-- Main variables *content* -->
+      <main class="app-content">
+        <div id="PageTitle">Social Media Handles</div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="True">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <div class="container-fluid   ">
+          <section class="dashboard-head-wrapper">
+            <div class="dashboard-head card-border">
+              <img
+                src="https://res.cloudinary.com/dsnmt7vn1/image/upload/v1670934127/famsup-image/server_1_ujggux_k7yu7m.png"
+                class="mascot-img">
+              <div class="dhead-body">
+                <h2>
+                  View our available social media handles. If you need something Custom, <a
+                    href="mailto:support@socialsmall.net">Let us know</a>
+                </h2>
+
+              </div>
+            </div>
+          </section>
+          <section>
+            <a href="{% url 'core:newinstagrams' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAflBMVEUAAAD///////2np6ePj4/39/fw8PD8/Pz5+fn09PTo6OjY2NgqKirJycmrq6uurq5AQEBxcXHf39+amppISEiAgIBnZ2eTk5PCwsIyMjLOzs6EhIR0dHRNTU3d3d1SUlJeXl46Ojq5ublbW1sdHR0kJCQNDQ0VFRXDw8MeHh6qjtOvAAAQG0lEQVR4nO1daVvqOhBWKSBLQVZl0wKKnv//B6+4dN7sM2lKuc/j++kcatNMMpk9yc3NH/7whxKn4X6+e3l52c33q/emO5MSD8uslQ/6991bBff9wXr0uJw33b1KmC9Gg85tCL3BePM/pPN1Mn7uBokDTMfbt6Y7zcdy3JcQV6JzmJya7nsYb9kgirpfDB6HTZPgw9vjtBJ535jOVk0T4sCi2uwhnjdNE2NidxAJljCeXpomScE2BXfq6F/PRD6GlV4c2rNrkK2nUbin3f76qTXLtsvj8dNqOx6X22zWelp3GIx9aFxLtvwd7OStxYu7k28vi1Ye4IBxozbszNOzdj478pjsVMzWbU9Lo8Z4dXPv6lM3zx6EjT1kazeNj7X0P4SjyzTrjYvIJotxz9FmZ5my6yz8yx3kjXaV2t25iBxc2NDJ7N34KBK0XXzYG58laJuLvVXB97NkH8isK6B/MTfSKkEHRdJvLK1GbivpN1wY2ibwSSo6w5g/2aZxn/w7BrY2+urx6VY2GtMtBQcO5jc/6hvXvUVi57V97YyhKQEG6fkT8WCux06NX1yaX6tfE09MBbmt61umDL2MijK/O6rnQ8a6H1zKsxkarLqu4zPP+lcWdXzFgY3+8Wlyf+Of7sUNLuu2verT2Etsp650/612tWTgUetBN6kNN9fiDXUKbHcndKF6TNf2i9Z0vUrXDd1HTqaqjlrDzXjcZ+h6IxGJ+gwmZA4xCq0vRYpGH7Ql2GzmRBd5CSLjK1XITKu3WA0nzTSuLPPe1TGrxZYQQpU33ao8pY7YU5IuVoVqPvaqNaZaEuM0PayMcbqFo/q7l4mScKDmSiosnccrJVCfxWhnSlU+18Ki31C5K9IlfrtCIUNQIzhxoSIlangNakKFIgQ7MS0ofNBP3b8EUBRZhDMwwfcr6px6cFKMEXHS/1Vh8+sscNlXWooKlxc1dC8FlOimcCEpmvCSaS0ZFH9RpK+H1y1GCYoVLgncII9epZQpgbEbAZ9uYkfm8thFLacTvtVcUIYHZSlyfUX0vwa1di8FMBbPFBlK5Om13u4lgCIVecE3tIaqlAe+D/fHY7FdfGGz2WSIz/9vvp8sj8f5sEqOB+tCWPbpoiqPvm1bH1NX6Y8b7Wk+2kTFldBF4IgNtPbk1tr2yVehxsA6E6d8Vvh++M9RNkm9+p2ttECOgdShxQLJsL8P4VGhrl+mKxRuC1NbyDchFsApnEg+skpXx35GT5SSwBKYULQFplAkZnyVpnEQ+bSoFP0KDjsaa8imQlvg8aHx5p9EqIkVjOF7TaXsBb8L6GT4UvyoPPkj+OqsFa4K/mLEDJlPBcBc8KOHJxuBnef8MG7NZtmX3bKdTCZLDZPJ9sve2cxmrfEhH1gLLgt2LyC6eO/+K4wK8JW9zqLtwyIu5fU2GRlksjlpDy+562BAXvBXoZZcP1TLWQ5bar6yzX4TJtGZq0Hrhy1I1VqeFKF/tcKaPdQoTl215pDRYevCd+xNqiIUhS3YdgfoxIPjT8AfYAsxTB+k85ZRLbP5FGPY9r8AOcNOA6CQTlllg5zKjqPADNllTR7RKLyTNt4Bs+gR/s537J2BYeMW/kHsny/0eIC1yHWmUCbYggbg27NjwOCYVS9seW2tpzm5TRHcAaNi40J4zBZfpOyrL8IfHusWP/+HpcgNh4ETZVOJEYwPcqZyvT6pquLnFzIG2f4wWAsmmwL9Lm1igJZ2ZTGDIUyjdfaqgayuOSoQYmGX5pGVV7kiGpX8zxr6Z9AcBNRWmKNCPMFm0ht5FxhNEUNQ3IdtQ3bdXQKrjs2kZMc+c19xQTH+fqUESWp2YBo4UTfLQFuyJSmZSeySndVut7Mar0jh73iRkcU26EGa6O+A48RtDRLFnGW4HA1KHpoeFppRgY7hb99oYvlJWmpFzyYSA/PFIpVeBdfJxNzGPFWkHabVS83j7K0b4GCoWhSENT9rT0Zp4A8zR6QfGalv+bX8jS/8nKsNHvB3KhNne/9s6wlUwXD+kgMBIpp4dp+g6l4VDjQdXXZjNMS+8P/JH0rt0YDOzjbgFEeeJCO/U9S0utw6jt+9KF/yLBO9uN47jTdalpoWOr/UmRaiMlfgBQnyTSX3uat09a08NriNdrJV+WYvVJ6iWgL3XpCOCc8749yTW4+9QNKBLxxAI6IOg6EW5JvLd1zqKnDwSZBE6hZ/FwsEDJEdySaXuOrlSw4+Mw9eGBxardl4baTAgw0Icm0kuXHgycaVuEHlS/YMgLabqAsnZgz1Y4nsSpjCDoK1Q6IG42lEtyCkS4VFdltdCV53dX9tqQbwrQuNKBR4Z+Aj0o9g2QvSy1QHbqVQOb/D9hcKE1tVKkkNAYXQLAlT4CcBw1Opjm3ilS199mjZHo05m5Yi50VAIegFIgaixYJdRCS1bBQiEzplPa5GSwST+iWoXNpTk8SQYJXyW/JTiCF2T6ARZtHSCE2HpDbLxhekmCUFJkShxQGGyhMfh2G6y3waRyGN2kf5GwkFyS4pYgeTQmAVv/cKcsEUckvPMzemlk+T+S8J7PooBHMt0AqtV3N0yWyXUEg+F3kERDU7CnXjp5BESMiSB+fDCG3HUUgKkdYcvz+IB/dbUPMZbIYm0VhscRQS/1BogEwaycYDD4VkjIRjSGReG8YfUSipxbZpBrKvJDLLQyE5aWFVTaaR4UjHUQjCq6zio58SUUiii+GM0RrRn8RRCGnCX/sFavMllZ0eCstOc6I+FCPSRU0cheAD/4YGIIYhqXn0UEihX0Y7JBn0sGschWBO/TYIm0UTUVg+4QSrSTLonnwyCkG2N0EhCdNCe/J/mENOyIDmUDfRk1EIDnAiCksFy0k4kGrRs1LJKEwvS8lOYbRDdqTuIiaTpen14dr8hhtkUelP4iiEWsLSnyebRmL/eSgcCRqkZgzVks6mSW6XEqOE898UNjYcmzgKIQ5d/kZ2k+SEib2bQljZwVpjcskNIRDnW5DkIt+iqn9o+lzUYqheHKxI41k6/5AEg2RXM1Fozjx4MAFZQ1No6s64KAaZ/bSwnyy/heGjEFSsXyVCMszUVHEUkqqi+aK1mSzWBpUJvrUN4VuLGxIXayO5SSsEkmuClrzxUqwrd3dvD39lEeNREeEbW5MwkoIaQ39UH8tLXP3DGmqbJxlF4dz2XRjwZHkLZWOnnVGVY6Vt4Y6ozAyYpUX5I6gvgWolx9mqY5QEsO0cbmXDqVXERVEISw4+SiJbohADL6kJwoOW89E2LFrLgElXCjwCGDj4lVSIpMqwfMmu1dVzpj71XfZr35y2+uUA9hzvJvDcCjI2UE+RGcCvrwrn8fVTQT8xXa/Xz2YNmMMcJhu64PeK3AjsFpjjgg3q5TsuS8h2Qr0NrqXhjuC4AfIZjUkYbQHHl6PljFXwSHTWDpCw4u/YBTsXWfvE+JyJktvctp6FUQ24xTe5mXzOgkIF5SWSewJRw6lrewteFFhwesuvYyJBo4oUu4jlNua1Zv2FUV5nhiQuv1PUtLp2QNTwFzWzvtRzFkGnSPEBBBigqtc6dz3wgYY4sBNsZ7/KqR+SaiWH82vRIPlcqE/I5eC7iNRacFvXv5m+HnvjsHyM6BN8RnsCo8w+k59Ym2P6v2/HPzfL9gaHDceHIdOeXV4ASSZ9VMBeZVu5FEaRWLN8kDZlrxyIlervgCnwYX3XAtKi9RyNKckk/wBY0ZCYUPPJ7sL5nbuvV2q5CoKCnGyFf+uhAmwBtiH/cXt3d/dFZB2nuhFbsd0B8H7NpQuKhH0kxuZM4ReRdbApMSl73cDGawtjeza2ufD+Q+EnjTVcJ+DtbegVm0b4iGjx+ZfEGs7bt6UfAgBJanN3Jv7HjibLSUx9rw6k3tnaEAoirRoa2JQvu0oKJdsYOADjhLsC9n4mVaQpW8OOicSoA6edAJnBlmKQIbC7LFDtzRbPp5LCu6TyFCONbOV1H3wHqq7Zq6oFJHaSMSr6ImwZBnLG5YtACJM/H+07IjGRuJkr203YZ97AynWFYnBDdcFt93iLJE6r68WhevgiWyTgIVdOzwVUIn93EPLpefazSjeibTVnmR82euZ0Hncq8c8qWZM8/TbD++NFzPHK+0nLiHfw85kY1fOkl0BlCrZ4kWVzh52bTtd5fhh/YtRqzSxotUafDw9P+fp5ar9nvcs/5BcGx6e3MIIrOHDml0SFwgQQ3AOEU+hNiYMUk+Rofhg1LX23HYHXCdznV+Z4+pqkiu9T0SSnUFIXgoI0UPUErr7IRnk5h/iTkig6hhZ4L1R4jZMoO+qau+mXh1x0kDhuZQwWrqE9IaLw5jTWuxlPn0zb4DH54dp5PM5bHCTMUhyW3Gn9E34WrSBGxAiD0/Ijyl43eaUDvQcz+dmLqCk4JgKKpTif732ZjfPBtMcntd3uP+eHx0ncfTa4sFi2P1qG1W8iext+YrXfPzzMP7E74/yPh4f9fnV+VP3CSDy4gedqKbU+TVwaK8Mcu8uUUCj3r/EqKxXIo2zRiKc6XNeFcibwajH+2TrKPUr13w9fBcrVYoIQg1Ky1OzlsX4oF5SIjjZEb+2al6KSWRYFwpTJryf/mQJKSEd4Y8xHhXcvBuXsEPHVYsopOQluTq4ByilbXXGSVrkM6yqvB1QskxiRrxzTdYWXr6kXPEZdJ6vcZXp9AlURo5Fn4HYStFEbFE809qjtvcLo13UNoho75h/npkHRiklPla8KNfZfQZvNrpRElcBKzoGaB7oWRh2k7JXa2HWIGzXcVbkKRK2a7FdKnSXBSe1RgvIB9fy/XtPWzUqNb/USVNS9a+c41lD9JIB24ut9ktKBNy0q2KSnoR2n2U3EUUONxOb8RX27VLJI4JvGqP1mAhsr7UjQbuUrJwiv+r1c0lsmU2Ch9SGx0NNL7fnXsqWCfgOoJEPMgl4m0Ym2dqPwop/Mm77c0xjDi8aKjdRkLTaycRFnYE9POiyNLFZNozvRv3P7VEuNvob33Phu6nLdEnvzNs76r143j3Xv1XmhvTmcHdGdumJszUGt2cGxHJTfry93M7Hsz5QcEhSFB8u9sdOilk/ZLonuXSI4fTC/q15LkQYTW13HhQIpS+vlscKrtAPIrFcM1yZDDdjvUD+kMnN2Njb5nMBLBhgK+y3Offnl9gbeH+3bv2V3kSeAq4xtsKky0qeNa1t0A/UEQ/v25TORWZz/uMqcu74HCV1BAQr3aQKd8VYWQXnbHtzXl3eaq5bY+k5M6DxlPNHzkn34LmfvXE6C2mCxqhT089bixeWMD182rTxwrESv+RT7IkDj9zxM1+er1rPNGdmsNX5aT1nvpdWysZg8h7sahWkT4SA7dnYToBryZmPPBpKUBxP6j5dwroWYj417nCJxf7jO8pZPHA+emwCZ6B6uu1bwphhzZKQLnWsn7xurLI/h1946a8Y2i8NqcQieEAXo885zuTrsNqN1iGd7g/HmauUKEw/FZnbIB/1e+7dqtdvu9Qf5YZYtr79Q/g9/+EMC/Ae4e8ME8tfe1QAAAABJRU5ErkJggg==" width="25px">
+                    NEW INSTAGRAM </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:oldinstagrams' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="data:image/png;base64,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" width="25px">
+                    OLD INSTAGRAM </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:twitters' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="data:image/png;base64,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" width="25px">
+                      TWITTER </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:facebooks' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/category8HD.png" width="25px">
+                     FACEBOOK 
+                  </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:facebookdating' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/category8HD.png" width="25px">
+                     FACEBOOK DATING
+                  </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:facebookads' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/categoryBXE7.png" width="25px">
+                     FACEBOOK ADS ACCOUNT
+                  </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:fanpages' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/category60C.png" width="25px">
+                     OLD FANPAGE ACCOUNT </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:googlevoices' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/category4OL.png" width="25px">
+                     GOOGLE VOICE ACCOUNT </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:linkedins' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/categoryRSD.png" width="25px">
+                     LINKEDIN ACCOUNT </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          
+          <section>
+            <a href="{% url 'core:netflix' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/category1V6.png" width="25px">
+                     NETFLIX ACCOUNT </h6>
+                  
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:tiktoks' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/categoryOMV.png" width="25px">
+                     TITKTOK ACCOUNTS </h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:vpns' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="https://acctbank.com/assets/storage/images/categoryD6A.png" width="25px">
+                     PREMIUM VPN SERVICES</h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:gmail' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="data:image/png;base64,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" width="25px">
+                     EMAIL ACCOUNTS</h6>
+                </div>
+              </div>
+            </a>
+          </section>
+          <br>
+          <section>
+            <a href="{% url 'core:snapchat' %}">
+              <div class="card card-border category-card" data-category="2">
+                <div class="card-body">
+                  <h6 style="color: white;">
+                    <img src="data:image/png;base64,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" width="25px">
+                     SNAPCHAT ACCOUNTS</h6>
+                </div>
+              </div>
+            </a>
+          </section>
+
+
+        </div>
+
+      </main>
+      {% include 'layouts/mobilenav.html' %}
+
+    </div>
+
+
+
+    <script src="//code.tidio.co/vh097nkowxj4ldchs3cipszlnyr3ww24.js" async></script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/global/aknio8ec1fpphc0p.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/global/nfos6j9mo1on7ksz.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/global/fshes06rdgduhe8u.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/global/t7hhepdgwrexlk9s.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/hj0v8i/ui3mumnxetcz5hl2.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.mypanel.link/hj0v8i/1fkio8uegwk8gm3h.js">
+    </script>
+    <script type="text/javascript">
+      window.modules.layouts = { "theme_id": 1, "auth": 1, "live": true, "csrftoken": "A1z7F6iYRVFGRxVpEMgcmoIWhYYxbS9KWrAW2FXU_mZFZKRz_asuC39wVyslknjZz3vjsXUpYnIi1iadA-asUQ==" };
+    </script>
+    <script type="text/javascript">
+      window.modules.siteServices = { "quickOrderAction": "\/quick-order", "quickOrderUrl": "\/" };
+    </script>
+    <script type="text/javascript">
+    </script>
+
+    <!-- Essientials Js -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+
+    <!-- swiper.js -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+
+
+    <script>
+      const serviceQuery = new URLSearchParams(window.location.search);
+      if (serviceQuery.get('service_id') !== null) {
+        const service_id = serviceQuery.get('service_id');
+        const services = window.modules.siteOrder.services;
+
+        const cat_id = services[service_id].cid;
+
+        var event = document.createEvent('HTMLEvents');
+
+        setTimeout(() => {
+          console.log(cat_id);
+          $('.select-option[data-value="' + cat_id + '"]').click();
+        }, 1000);
+
+        setTimeout(() => {
+          $('.select-option[data-value="' + service_id + '"]').click();
+
+          event.initEvent('change', true, false);
+          serviceSelect.dispatchEvent(event);
+        }, 1500);
+      }
+    </script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934647/js/main_fiiz64_cnjvz4.js"></script>
+
+    <script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934737/js/howler_rqlpez_q5iapf.js"></script>
+
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+    <script>
+
+      const testimonialComments = new Swiper("#testimonialComments", {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1,
+        allowTouchMove: false,
+        autoHeight: true
+      });
+      const testimonialMember = new Swiper('#testimonialMember', {
+        loop: true,
+        slidesPerView: 3,
+        slideToClickedSlide: true,
+        centeredSlides: true,
+        autoplay: {
+          delay: 3000,
+        },
+        breakpoints: {
+          740: {
+            slidesPerView: 5,
+          }
+        },
+        on: {
+          slideChange: function () {
+            testimonialComments.slideTo(this.realIndex + 1)
+          }
+        }
+      });
+    </script>
+    <script>
+	var beamer_config = {
+		product_id : 'HIoQFNaK58134' //DO NOT CHANGE: This is your product code on Beamer
+	};
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
+      integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      $('.slickSlider').slick({
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        arrows: false,
+        speed: 300,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+
+    </script>
+
+</body>
+
+</html>

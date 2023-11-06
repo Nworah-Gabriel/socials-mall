@@ -1,0 +1,366 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Services</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+				  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+				  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+				  <![endif]-->
+
+    <!-- CDN CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <!-- //.CDN CSS Files -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'cdn.mypanel.link/hj0v8i/0gqde1af730nbh57.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'cdn.mypanel.link/hj0v8i/15xb4ubsywrfrzg5.css' %}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.mypanel.link/libs/bootstrap-datetimepicker/4.17.47/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.mypanel.link/css/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.mypanel.link/global/c3gyq3shygmabbke.css">
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <div class="dashboard-root">
+            <button class="sidebar-toggle" id="sidebar-toggle" onclick="dashboardMenuToggle()">
+                <i class="ri-menu-line menu-bar"></i>
+                <i class="ri-close-line close-i"></i>
+            </button>
+            {% include 'layouts/sidebar.html' %}
+            <div id="header" class="d-header">
+                <div class="container-fluid">
+                    <div class="row align-items-center head-row">
+                        <div class="col-auto d-none d-md-block d-xxl-none col-item">
+                            <div style="width:56px;"></div>
+                        </div>
+                        <div class="col col-page-title col-item">
+                            <h1 class="page-title" id="pageTitleHeader">Socials Mall</h1>
+                        </div>
+                        <div class="col-auto col-item">
+                            <div class="d-dropdown">
+                                <a href="{% url 'core:account' %}">
+                                    <button class="btn" type="button" id="changeCurrencyDd">
+                                        <div class="icon user-avatar">
+                                            <img src="https://res.cloudinary.com/dsnmt7vn1/image/upload/v1670929805/famsup-image/users_avatar_vmgphf.png"
+                                                alt="User Avatar">
+                                        </div>
+                                        <div class="content">
+                                            <div class="title">
+                                                <span>@{{request.user.username}}</span>
+                                                <i class="ri-checkbox-circle-line p-color"></i>
+                                            </div>
+                                            <div class="info d-flex align-items-center">
+                                                See Dashboard
+                                                <i class="ri-arrow-right-line ms-2"></i>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </a>
+                            </div><!-- ./Updates -->
+                        </div><!-- col-item -->
+                    </div>
+                </div>
+            </div><!-- ./d-header -->
+            <!-- Main variables *content* -->
+            <main class="app-content">
+                <div id="PageTitle">Services</div>
+
+                <div class="container-fluid   ">
+                    <section class="dashboard-head-wrapper">
+                        <div class="dashboard-head card-border">
+                            <img src="https://res.cloudinary.com/dsnmt7vn1/image/upload/v1670934127/famsup-image/server_1_ujggux_k7yu7m.png"
+                                class="mascot-img">
+                            <div class="dhead-body">
+                                <h2 class="title">
+                                    View our Services. If you need something Custom, let us know!
+                                </h2>
+                                <p class="text">
+                                    <a href="mailt0:info@socialsmall.net">Let us know</a>
+                                    if you are a reseller or marketing company. Please register and open a ticket to
+                                    request a Reseller Service List.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="mb-4">
+                        <div class="card card-border">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    
+                                    <!-- ./col -->
+                                    <div class="col-lg">
+                                        <div class="search-services">
+                                            <div class="icon">
+                                                <i class="ri-search-line"></i>
+                                            </div>
+                                            <input type="text" class="textbox" name="query" id="filterServicesInput"
+                                                placeholder="Search in services" data-search-service="#service-table">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="sp-services">
+
+                        <div class="card card-border category-card" data-category="1">
+                            <div class="card-header d-none d-lg-block">
+                                <div class="s-title-wrapper">
+                                    <div class="s-row s-title">
+
+                                        <div class="s-col s-title">
+                                            Service
+                                        </div>
+
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <h2 class="sp-service-title">
+                                    AVAILABLE  GUARANTEED  HANDLES </h2>
+                                <div class="services-wrapper">
+                                    <div class="si-wrapper" data-filter-table-service-id="1779">
+
+                                        {% for i in handles %}
+                                        <div class="service-item">
+                                            <div class="s-row">
+
+
+                                                <div class="s-col s-title">
+                                                    <span class="sp-serv-title">
+                                                        {{i.description}}
+                                                    </span>
+                                                </div>
+
+                                                <div class="s-col s-col-md s-col-c" data-title="Per 1000">
+                                                    <span class="sp-serv-sm">
+                                                        NGN {{i.price}}
+                                                    </span>
+                                                </div>
+
+                                               <div class="s-col s-col-md s-col-btn">
+                                                    <a href="{{i.link}}"
+                                                        class="btn btn-info btn-border btn-block btn-sm" style="color: white;">view</a>
+                                                </div>
+                                                <div class="s-col s-col-md s-col-btn">
+                                                    <a href="{% url 'core:buyhandle' id=i.id %}"
+                                                        class="btn btn-info btn-border btn-block btn-sm" style="color: white;">Buy</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- ./service-item -->
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </section>
+                </div>
+
+
+                <!-- <div id="sp-modal" class="sp-modal">
+                    <div class="sp-modal-card">
+                        <button class="sp-modal-close" onclick="spModalClose()"><i class="ri-close-line"></i></button>
+                        <div class="sp-modal-header">
+                            <div class="sp-modal-service-id"></div>
+                            <h3 class="sp-modal-title"></h3>
+                        </div>
+                        <div class="sp-modal-body">
+                            <div class="sp-modal-body-card">
+
+                            </div>
+                            <a class="btn btn-primary btn-border btn-block sp-modal-link" href="">Buy Now</a>
+                        </div>
+                    </div>
+                </div> -->
+
+            </main>
+            {% include 'layouts/mobilenav.html' %}
+        </div>
+
+
+        <script src="//code.tidio.co/vh097nkowxj4ldchs3cipszlnyr3ww24.js" async></script>
+
+        <script type="text/javascript" src="https://cdn.mypanel.link/libs/jquery/1.12.4/jquery.min.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/global/aknio8ec1fpphc0p.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/global/nfos6j9mo1on7ksz.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/global/fshes06rdgduhe8u.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/global/t7hhepdgwrexlk9s.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/hj0v8i/ui3mumnxetcz5hl2.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.mypanel.link/hj0v8i/1fkio8uegwk8gm3h.js">
+        </script>
+        <script type="text/javascript">
+            window.modules.layouts = { "theme_id": 1, "auth": 1, "live": true, "csrftoken": "A1z7F6iYRVFGRxVpEMgcmoIWhYYxbS9KWrAW2FXU_mZFZKRz_asuC39wVyslknjZz3vjsXUpYnIi1iadA-asUQ==" };
+        </script>
+        <script type="text/javascript">
+            window.modules.siteServices = { "quickOrderAction": "\/quick-order", "quickOrderUrl": "\/" };
+        </script>
+        <script type="text/javascript">
+        </script>
+
+        <!-- Essientials Js -->
+
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+        <!-- swiper.js -->
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+
+
+        <script>
+            const serviceQuery = new URLSearchParams(window.location.search);
+            if (serviceQuery.get('service_id') !== null) {
+                const service_id = serviceQuery.get('service_id');
+                const services = window.modules.siteOrder.services;
+
+                const cat_id = services[service_id].cid;
+
+                var event = document.createEvent('HTMLEvents');
+
+                setTimeout(() => {
+                    console.log(cat_id);
+                    $('.select-option[data-value="' + cat_id + '"]').click();
+                }, 1000);
+
+                setTimeout(() => {
+                    $('.select-option[data-value="' + service_id + '"]').click();
+
+                    event.initEvent('change', true, false);
+                    serviceSelect.dispatchEvent(event);
+                }, 1500);
+            }
+        </script>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934647/js/main_fiiz64_cnjvz4.js"></script>
+
+        <script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934737/js/howler_rqlpez_q5iapf.js"></script>
+
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+        <script>
+
+            const testimonialComments = new Swiper("#testimonialComments", {
+                loop: true,
+                spaceBetween: 10,
+                slidesPerView: 1,
+                allowTouchMove: false,
+                autoHeight: true
+            });
+            const testimonialMember = new Swiper('#testimonialMember', {
+                loop: true,
+                slidesPerView: 3,
+                slideToClickedSlide: true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 3000,
+                },
+                breakpoints: {
+                    740: {
+                        slidesPerView: 5,
+                    }
+                },
+                on: {
+                    slideChange: function () {
+                        testimonialComments.slideTo(this.realIndex + 1)
+                    }
+                }
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
+            integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $('.slickSlider').slick({
+                dots: true,
+                infinite: true,
+                autoplay: true,
+                arrows: false,
+                speed: 300,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
+            });
+
+        </script>
+        <script>
+	var beamer_config = {
+		product_id : 'HIoQFNaK58134' //DO NOT CHANGE: This is your product code on Beamer
+	};
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+
+</body>
+
+</html>
