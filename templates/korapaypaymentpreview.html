@@ -248,10 +248,10 @@
               name: "{{request.user.first_name}} {{request.user.last_name}}",
               email: "{{request.user.email}}"
             },
-            notification_url: "https://socialsmall.net/korapay/webhook/",
+            notification_url: "http://localhost:8000/korapay/webhook/",
             onSuccess: function (response) {
                 // Redirect to a success URL
-                window.location.href = "https://socialsmall.net/user/deposit/korapay/success/";
+                window.location.href = "http://localhost:8000/user/deposit/korapay/success/";
             }
         });
     }

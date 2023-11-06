@@ -775,40 +775,38 @@ def flutterwaveWebhook(request):
 
     return HttpResponse(status=405)
 
-def verify_signature(request_data, secret_key, signature_header):
-    request_data_bytes = json.dumps(request_data, separators=(',', ':')).encode('utf-8')
-    hasher = hmac.new(secret_key, request_data_bytes, hashlib.sha256)
-    calculated_signature = hasher.hexdigest()
-    return hmac.compare_digest(calculated_signature, signature_header)
 
 @csrf_exempt
 def korapayWebhook(request):
-    if request.method == "POST":
-        secret_hash =  settings.KORAPAY_WEBHOOK_HASH.encode('utf-8')
-        signature = request.headers.get("x-korapay-signature")
-        if signature == None or (signature != secret_hash):
-            # This request isn't from Flutterwave; discard
+    if request.method == 'POST':
+        # Retrieve the signature from the request headers
+        signature_header = request.META.get('X_KORAPAY_SIGNATURE')
+
+        if not signature_header:
+            # Signature header not provided; discard the request
             return HttpResponse(status=401)
 
-        # Retrieve the raw JSON data from the request
         try:
-            payload = json.loads(request.body.decode('utf-8'))
-        except json.JSONDecodeError as e:
-            return JsonResponse({"error": "Invalid JSON payload"}, status=400)
+            # Retrieve the raw JSON data from the request body
+            raw_data = request.body
+            # Decode the binary data into a string
+            data_str = raw_data.decode('utf-8')
+            # Parse the JSON data
+            request_data = json.loads(data_str)
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return JsonResponse({'error': 'Invalid JSON payload'}, status=400)
 
-        # Process the webhook data and confirm the payment
-        # You can implement your payment confirmation logic here
-        # Make sure to verify the authenticity of the webhook data
-        # Process the webhook data and confirm the payment
-        event_type = payload.get("event")
-        
-        if verify_signature(payload, secret_hash, signature):
+        # Compute the HMAC signature of the JSON data
+        hasher = hmac.new(KORAPAY_WEBHOOK_HASH, data_str.encode('utf-8'), hashlib.sha256)
+        calculated_signature = hasher.hexdigest()
+
+        # Compare the calculated signature with the provided signature in the request headers
+        if hmac.compare_digest(calculated_signature, signature_header):
             # Continue with the request functionality
-
-            event_type = request_data.get("event")
+            event_type = payload.get("event")
 
             if event_type == "charge.success":
-                transaction_ref = request_data["data"]["payment_reference"]
+                transaction_ref = payload["data"]["payment_reference"]
 
                 try:
                     # Query your database to find the user associated with this transaction
@@ -819,13 +817,15 @@ def korapayWebhook(request):
                     else:
                         payment.confirmed = True
                         payment.save()
-                        
+
                         user = payment.user
                         # Update the user's balance
-                        payload_amount = Decimal(str(request_data["data"]["amount"]))
+                        print(payload['data']['amount'])
+                        payload_amount = Decimal(str(payload["data"]["amount"]))
                         user.balance += payload_amount
                         user.save()
-                        
+                    
+
                         return JsonResponse({"status": "Webhook received"}, status=200)
                 except Payment.DoesNotExist:
                     return JsonResponse({"error": "Payment not found"}, status=404)
@@ -837,5 +837,4 @@ def korapayWebhook(request):
             return HttpResponse(status=401)
 
     return HttpResponse(status=405)
-
 

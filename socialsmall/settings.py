@@ -82,6 +82,8 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'x-korapay-signature',
+    'verif-hash',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
