@@ -305,6 +305,11 @@ def flutterwaveSuccess(request):
     messages.success(request, "Deposit successful")
     return redirect("core:dashboard")
     
+@login_required(login_url="core:index")
+def korapaySuccess(request):
+    messages.success(request, "Deposit successful")
+    return redirect("core:dashboard")
+    
 
 @login_required(login_url="core:index")
 def orders(request):
