@@ -773,7 +773,7 @@ def flutterwaveWebhook(request):
 def korapayWebhook(request):
     if request.method == "POST":
         secret_hash =  settings.WEBHOOK_HASH
-        signature = request.headers.get("verif-hash")
+        signature = request.headers.get("x-korapay-signature")
         if signature == None or (signature != secret_hash):
             # This request isn't from Flutterwave; discard
             return HttpResponse(status=401)
@@ -790,8 +790,8 @@ def korapayWebhook(request):
         # Process the webhook data and confirm the payment
         event_type = payload.get("event")
         
-        if event_type == "charge.completed":
-            transaction_ref = payload["data"]["tx_ref"]
+        if event_type == "charge.success":  
+            transaction_ref = payload["data"]["payment_reference"]
             # Query your database to find the user associated with this transaction
             # try:
             payment = Payment.objects.get(transaction_ref=transaction_ref)

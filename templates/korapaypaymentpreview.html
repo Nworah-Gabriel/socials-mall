@@ -116,7 +116,7 @@
                                         <h3 class="card-title">Pay with Korapay</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form method="post" action="">
+                                        <form>
                                             <script src="https://korablobstorage.blob.core.windows.net/modal-bucket/korapay-collections.min.js"></script>
                                             <div class="alert alert-dismissible alert-danger ticket-danger "
                                                 style="display: none">
@@ -137,7 +137,7 @@
                                                     name="TicketForm[message]">NGN{{payment.amount}}</label>
                                             </div>
 
-                                            <button type="button" onclick="payKorapay()"> Pay </button>
+                                            <button type="button" onclick="payKorapay()" class="btn btn-primary btn-border btn-block"> Pay </button>
                                         </form>
                                     </div>
                                 </div>
@@ -242,10 +242,10 @@
         window.Korapay.initialize({
             key: "{{korapayPublickey}}",
             reference: "{{payment.transaction_ref}}",
-            amount: "{{payment.amount}}", 
+            amount: {{payment.amount}}, 
             currency: "NGN",
             customer: {
-              name: "{{request.user.first_name}} {{request.user.last_name}}",
+              name: "Ejike Sylva",
               email: "{{request.user.email}}"
             },
             notification_url: "https://socialsmall.net/korapay/webhook/"
