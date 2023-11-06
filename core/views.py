@@ -24,6 +24,8 @@ import random
 import string
 from coinbase_commerce.client import Client
 from decimal import Decimal
+import hashlib
+import hmac
 # Create your views here.
 
 flutterWavePublicKey = settings.FLUTTER_API_PUBLIC_KEY
@@ -773,11 +775,16 @@ def flutterwaveWebhook(request):
 
     return HttpResponse(status=405)
 
+def verify_signature(request_data, secret_key, signature_header):
+    request_data_bytes = json.dumps(request_data, separators=(',', ':')).encode('utf-8')
+    hasher = hmac.new(secret_key, request_data_bytes, hashlib.sha256)
+    calculated_signature = hasher.hexdigest()
+    return hmac.compare_digest(calculated_signature, signature_header)
 
 @csrf_exempt
 def korapayWebhook(request):
     if request.method == "POST":
-        secret_hash =  settings.WEBHOOK_HASH
+        secret_hash =  settings.KORAPAY_WEBHOOK_HASH.encode('utf-8')
         signature = request.headers.get("x-korapay-signature")
         if signature == None or (signature != secret_hash):
             # This request isn't from Flutterwave; discard
@@ -785,7 +792,7 @@ def korapayWebhook(request):
 
         # Retrieve the raw JSON data from the request
         try:
-            payload = json.loads(request.body)
+            payload = json.loads(request.body.decode('utf-8'))
         except json.JSONDecodeError as e:
             return JsonResponse({"error": "Invalid JSON payload"}, status=400)
 
@@ -795,26 +802,40 @@ def korapayWebhook(request):
         # Process the webhook data and confirm the payment
         event_type = payload.get("event")
         
-        if event_type == "charge.success":  
-            transaction_ref = payload["data"]["payment_reference"]
-            # Query your database to find the user associated with this transaction
-            # try:
-            payment = Payment.objects.get(transaction_ref=transaction_ref)
-            if payment.confirmed == True:
+        if verify_signature(payload, secret_hash, signature):
+            # Continue with the request functionality
+
+            event_type = request_data.get("event")
+
+            if event_type == "charge.success":
+                transaction_ref = request_data["data"]["payment_reference"]
+
+                try:
+                    # Query your database to find the user associated with this transaction
+                    payment = Payment.objects.get(transaction_ref=transaction_ref)
+
+                    if payment.confirmed:
+                        return JsonResponse({"status": "Webhook received"}, status=200)
+                    else:
+                        payment.confirmed = True
+                        payment.save()
+                        
+                        user = payment.user
+                        # Update the user's balance
+                        payload_amount = Decimal(str(request_data["data"]["amount"]))
+                        user.balance += payload_amount
+                        user.save()
+                        
+                        return JsonResponse({"status": "Webhook received"}, status=200)
+                except Payment.DoesNotExist:
+                    return JsonResponse({"error": "Payment not found"}, status=404)
+            else:
+                # Handle other event types or ignore them
                 return JsonResponse({"status": "Webhook received"}, status=200)
-                
-            else:   
-                payment.confirmed = True
-                payment.save()
-                
-                user = payment.user
-                # Update the user's balance
-                payloadamount = payload["data"]["amount"]
-                user.balance += Decimal(str(payloadamount))
-                user.save()
-                return JsonResponse({"status": "Webhook received"}, status=200)
-            # except Payment.DoesNotExist:
-            #     return JsonResponse({"error": "Payment not found"}, status=404)
+        else:
+            # Invalid signature; discard the request
+            return HttpResponse(status=401)
 
     return HttpResponse(status=405)
-    
+
+
