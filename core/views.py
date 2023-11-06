@@ -778,10 +778,12 @@ def flutterwaveWebhook(request):
 
 @csrf_exempt
 def korapayWebhook(request):
+    secret_key_str = settings.KORAPAY_WEBHOOK_HASH
+    secret_key = secret_key_str.encode('utf-8')
     if request.method == 'POST':
         # Retrieve the signature from the request headers
-        signature_header = request.META.get('X_KORAPAY_SIGNATURE')
-
+        signature_header = request.META.get('HTTP_X_KORAPAY_SIGNATURE')
+        print(signature_header)
         if not signature_header:
             # Signature header not provided; discard the request
             return HttpResponse(status=401)
@@ -797,7 +799,7 @@ def korapayWebhook(request):
             return JsonResponse({'error': 'Invalid JSON payload'}, status=400)
 
         # Compute the HMAC signature of the JSON data
-        hasher = hmac.new(KORAPAY_WEBHOOK_HASH, data_str.encode('utf-8'), hashlib.sha256)
+        hasher = hmac.new(secret_key, data_str.encode('utf-8'), hashlib.sha256)
         calculated_signature = hasher.hexdigest()
 
         # Compare the calculated signature with the provided signature in the request headers
