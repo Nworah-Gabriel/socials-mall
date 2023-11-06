@@ -23,8 +23,9 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-v+=sz^h(k(*lll&@hv^9%&_te$^k=xk)&j702h5*b)v7q6%-mq"
-WEBHOOK_HASH = "4d4446664971659746c5ccff67e-X"
+SECRET_KEY = env("SECRET_KEY")
+FLUTTERWAVE_WEBHOOK_HASH = env("FLUTTERWAVE_WEBHOOK_HASH")
+KORAPAY_WEBHOOK_HASH = env("KORAPAY_WEBHOOK_HASH")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -215,7 +216,7 @@ STATIC_ROOT = "/home/socirgpp/public_html/static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+KORAPAY_API_PUBLIC_KEY = env('KORAPAY_API_PUBLIC_KEY')
 FLUTTER_API_PUBLIC_KEY = env('FLUTTER_API_PUBLIC_KEY')
 FLUTTER_API_SECRET_KEY = env('FLUTTER_API_SECRET_KEY')
 FLUTTER_API_ENCRYPTION_KEY = env('FLUTTER_API_ENCRYPTION_KEY')

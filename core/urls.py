@@ -17,6 +17,7 @@ urlpatterns = [
     path("user/delivery/", views.delivery, name="delivery"),
     path("user/purchasehistory/", views.purchaseHistory, name="purchasehistory"),
     path("user/flutterwave/payment/preview/<str:ref>/", views.flutterWavePaymentPreviewPage, name="flutterpaymentpreview"),
+    path("user/korapay/payment/preview/<str:ref>/", views.korapayPaymentPreviewPage, name="korapaypreview"),
     path("user/crypto/payment/preview/", views.cryptoPaymentPreviewPage, name="cryptopaymentpreview"),
     path("user/deposit/flutterwave/success/", views.flutterwaveSuccess, name="flutterwavesuccess"),
     path("user/deposit/success/", views.cryptosuccess, name="cryptosuccess"),
@@ -38,4 +39,5 @@ urlpatterns = [
     path("user/handles/snapchat/", views.snapchat, name="snapchat"),
     path('download/<int:pk>/', views.download_file, name='download_file'),
     path("flutterwave/webhook/", views.flutterwaveWebhook, name="flutterwavewebhook"),
+    path("korapay/webhook/", views.korapayWebhook, name="korapaywavewebhook"),
 ]

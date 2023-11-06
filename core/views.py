@@ -27,6 +27,7 @@ from decimal import Decimal
 # Create your views here.
 
 flutterWavePublicKey = settings.FLUTTER_API_PUBLIC_KEY
+korapayPublicKey = settings.KORAPAY_API_PUBLIC_KEY
 
 def index(request):
     if request.user.is_authenticated and request.method == "GET":
@@ -171,6 +172,12 @@ def addFunds(request):
         payment = Payment.objects.create(user=user, amount=amount, method=method)
         url = reverse('core:flutterpaymentpreview', kwargs={'ref': payment.transaction_ref})
         return redirect(url)
+    elif request.method == "POST" and request.POST["method"] == "korapay":
+        amount = float(request.POST['amount'])
+        method = request.POST["method"]
+        payment = Payment.objects.create(user=user, amount=amount, method=method)
+        url = reverse('core:korapaypreview', kwargs={'ref': payment.transaction_ref})
+        return redirect(url)
     elif request.method == "POST" and request.POST["method"] == "crypto":
         amount = float(request.POST['amount'])
         method = request.POST["method"]
@@ -198,6 +205,20 @@ def flutterWavePaymentPreviewPage(request, ref):
         "payment": depositprev,
     }
     return render(request, "flutterwavepaymentpreview.html", context=data)
+
+
+@login_required(login_url="core:index")
+def korapayPreviewPage(request, ref):
+    user = User.objects.get(id=request.user.id)
+    try:
+        depositprev = Payment.objects.get(user=user, transaction_ref=ref)
+    except Payment.DoesNotExist:
+        return redirect("core:addfunds")
+    data = {
+        "korapayPublickey": korapayPublicKey,
+        "payment": depositprev,
+    }
+    return render(request, "korapaypaymentpreview.html", context=data)
 
 
 @login_required(login_url="core:index")
@@ -705,6 +726,51 @@ def download_file(request, pk):
 
 @csrf_exempt
 def flutterwaveWebhook(request):
+    if request.method == "POST":
+        secret_hash =  settings.FLUTTERWAVE_WEBHOOK_HASH
+        signature = request.headers.get("verif-hash")
+        if signature == None or (signature != secret_hash):
+            # This request isn't from Flutterwave; discard
+            return HttpResponse(status=401)
+
+        # Retrieve the raw JSON data from the request
+        try:
+            payload = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({"error": "Invalid JSON payload"}, status=400)
+
+        # Process the webhook data and confirm the payment
+        # You can implement your payment confirmation logic here
+        # Make sure to verify the authenticity of the webhook data
+        # Process the webhook data and confirm the payment
+        event_type = payload.get("event")
+        
+        if event_type == "charge.completed":
+            transaction_ref = payload["data"]["tx_ref"]
+            # Query your database to find the user associated with this transaction
+            # try:
+            payment = Payment.objects.get(transaction_ref=transaction_ref)
+            if payment.confirmed == True:
+                return JsonResponse({"status": "Webhook received"}, status=200)
+                
+            else:   
+                payment.confirmed = True
+                payment.save()
+                
+                user = payment.user
+                # Update the user's balance
+                payloadamount = payload["data"]["amount"]
+                user.balance += Decimal(str(payloadamount))
+                user.save()
+                return JsonResponse({"status": "Webhook received"}, status=200)
+            # except Payment.DoesNotExist:
+            #     return JsonResponse({"error": "Payment not found"}, status=404)
+
+    return HttpResponse(status=405)
+
+
+@csrf_exempt
+def korapayWebhook(request):
     if request.method == "POST":
         secret_hash =  settings.WEBHOOK_HASH
         signature = request.headers.get("verif-hash")
