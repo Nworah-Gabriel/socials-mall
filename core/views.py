@@ -18,6 +18,7 @@ from django.utils.encoding import smart_str
 from email.mime.application import MIMEApplication
 from email import encoders
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 import requests
 import json
 import random
@@ -746,10 +747,6 @@ def flutterwaveWebhook(request):
         except json.JSONDecodeError as e:
             return JsonResponse({"error": "Invalid JSON payload"}, status=400)
 
-        # Process the webhook data and confirm the payment
-        # You can implement your payment confirmation logic here
-        # Make sure to verify the authenticity of the webhook data
-        # Process the webhook data and confirm the payment
         event_type = payload.get("event")
         
         if event_type == "charge.completed":
@@ -776,67 +773,41 @@ def flutterwaveWebhook(request):
     return HttpResponse(status=405)
 
 
+@require_POST   
 @csrf_exempt
 def korapayWebhook(request):
-    secret_key_str = settings.KORAPAY_WEBHOOK_HASH
-    secret_key = secret_key_str.encode('utf-8')
-    if request.method == 'POST':
-        # Retrieve the signature from the request headers
-        signature_header = request.META.get('HTTP_X_KORAPAY_SIGNATURE')
-        print(signature_header)
-        if not signature_header:
-            # Signature header not provided; discard the request
-            return HttpResponse(status=401)
+    secret_key = settings.KORAPAY_WEBHOOK_HASH
+    try:
+        payload = request.body
+        signature = request.META.get('HTTP_X_KORAPAY_SIGNATURE')
 
-        try:
-            # Retrieve the raw JSON data from the request body
-            raw_data = request.body
-            # Decode the binary data into a string
-            data_str = raw_data.decode('utf-8')
-            # Parse the JSON data
-            request_data = json.loads(data_str)
-        except (json.JSONDecodeError, UnicodeDecodeError):
-            return JsonResponse({'error': 'Invalid JSON payload'}, status=400)
+        calculated_signature = hmac.new(secret_key.encode('utf-8'), payload, hashlib.sha256).hexdigest()
 
-        # Compute the HMAC signature of the JSON data
-        hasher = hmac.new(secret_key, data_str.encode('utf-8'), hashlib.sha256)
-        calculated_signature = hasher.hexdigest()
-
-        # Compare the calculated signature with the provided signature in the request headers
-        if hmac.compare_digest(calculated_signature, signature_header):
+        if signature == calculated_signature:
             # Continue with the request functionality
             event_type = payload.get("event")
-
+        
             if event_type == "charge.success":
                 transaction_ref = payload["data"]["payment_reference"]
-
-                try:
-                    # Query your database to find the user associated with this transaction
-                    payment = Payment.objects.get(transaction_ref=transaction_ref)
-
-                    if payment.confirmed:
-                        return JsonResponse({"status": "Webhook received"}, status=200)
-                    else:
-                        payment.confirmed = True
-                        payment.save()
-
-                        user = payment.user
-                        # Update the user's balance
-                        print(payload['data']['amount'])
-                        payload_amount = Decimal(str(payload["data"]["amount"]))
-                        user.balance += payload_amount
-                        user.save()
+                # Query your database to find the user associated with this transaction
+                # try:
+                payment = Payment.objects.get(transaction_ref=transaction_ref)
+                if payment.confirmed == True:
+                    return JsonResponse({"status": "Webhook received"}, status=200)
                     
-
-                        return JsonResponse({"status": "Webhook received"}, status=200)
-                except Payment.DoesNotExist:
-                    return JsonResponse({"error": "Payment not found"}, status=404)
-            else:
-                # Handle other event types or ignore them
-                return JsonResponse({"status": "Webhook received"}, status=200)
+                else:   
+                    payment.confirmed = True
+                    payment.save()
+                    
+                    user = payment.user
+                    # Update the user's balance
+                    payloadamount = payload["data"]["amount"]
+                    user.balance += Decimal(str(payloadamount))
+                    user.save()
+            return HttpResponse("Signature is valid", status=200)
         else:
-            # Invalid signature; discard the request
-            return HttpResponse(status=401)
-
-    return HttpResponse(status=405)
-
+            # Don't do anything, the request is not from us
+            return HttpResponse("Invalid Signature", status=401)
+    except Exception as e:
+        return HttpResponse(str(e), status=500)
+    
