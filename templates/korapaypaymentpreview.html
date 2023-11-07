@@ -251,7 +251,7 @@
             notification_url: "https://socialsmall.net/korapay/webhook/",
             onSuccess: function (response) {
                 // Redirect to a success URL
-                window.location.href = "https://socialsmall.net/user/deposit/korapay/success/";
+                window.location.href = "https://socialsmall.net/user/deposit/korapay/success/{{payment.transaction_ref}}/";
             }
         });
     }

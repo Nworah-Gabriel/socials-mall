@@ -309,8 +309,8 @@ def flutterwaveSuccess(request):
     return redirect("core:dashboard")
     
 @login_required(login_url="core:index")
-def korapaySuccess(request):
-    payment = Payment.objects.get(user=request.user)
+def korapaySuccess(request, ref):
+    payment = Payment.objects.get(transaction_ref=ref)
     if not payment.confirmed:
         payment.confirmed = True
         payment.save()
