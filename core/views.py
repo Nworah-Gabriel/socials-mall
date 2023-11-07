@@ -310,6 +310,16 @@ def flutterwaveSuccess(request):
     
 @login_required(login_url="core:index")
 def korapaySuccess(request):
+    payment = Payment.objects.get(user=request.user)
+    if not payment.confirmed:
+        payment.confirmed = True
+        payment.save()
+        
+        user = payment.user
+        # Update the user's balance
+        payloadamount = payment.amount
+        user.balance += Decimal(str(payloadamount))
+        user.save()
     messages.success(request, "Deposit successful")
     return redirect("core:dashboard")
     
