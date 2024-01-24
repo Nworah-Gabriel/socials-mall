@@ -155,7 +155,7 @@ def dashboard(request):
         "orders": orders,
         "page": "dashboard"
     }
-    return render(request, "dashboard.html", context=data)
+    return render(request, "dashboard2.html", context=data)
 
 
 @login_required(login_url="core:index")

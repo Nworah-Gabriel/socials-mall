@@ -1,0 +1,944 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Include Font Awesome CSS -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
+    />
+    <!-- //.CDN CSS Files -->
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'cdn.mypanel.link/hj0v8i/0gqde1af730nbh57.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'cdn.mypanel.link/hj0v8i/15xb4ubsywrfrzg5.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.mypanel.link/libs/bootstrap-datetimepicker/4.17.47/bootstrap-datetimepicker.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.mypanel.link/css/font-awesome/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.mypanel.link/global/c3gyq3shygmabbke.css"
+    />
+
+    <!-- iboost static files -->
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/templates/basic/master/css/vendor/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/templates/basic/css/custom.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/templates/basic//css/bootstrap-fileinput.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link href="{% static 'assets/templates/basic/css/dashboard2.css' %}" rel="stylesheet">
+
+    <!-- iboost static files end -->
+    
+    <style>
+        /* Styles for the accordion */
+  
+        .accordion-section {
+          border: 1px solid #ddd;
+          margin-bottom: 10px;
+        }
+  
+        .accordion-header {
+          background-color: #f1f1f1;
+          padding: 10px;
+          cursor: pointer;
+        }
+  
+        .accordion-content {
+          padding: 10px;
+          display: none;
+        }
+        .accordion-header.active {
+          background-color: #ccc;
+        }
+  
+        /* CSS to make dropdown options responsive */
+        @media (max-width: 576px) {
+          .options {
+            font-size: 1rem;
+            color: red !important;
+          }
+        }
+  
+        @media (min-width: 577px) and (max-width: 767px) {
+          .options {
+            font-size: 3rem;
+            color: red !important;
+          }
+        }
+      </style>
+    </head>
+
+
+<body>
+
+    <div class="dashboard-root">
+        <div class="dashboard-root">
+          <button
+            class="sidebar-toggle"
+            id="sidebar-toggle"
+            onclick="dashboardMenuToggle()"
+          >
+            <i class="ri-menu-line menu-bar"></i>
+            <i class="ri-close-line close-i"></i>
+          </button>
+          {% include 'layouts/sidebar.html' %}
+          <div id="header" class="d-header">
+            <div class="container-fluid">
+              <div class="row align-items-center head-row">
+                <div class="col-auto d-none d-md-block d-xxl-none col-item">
+                  <div style="width: 56px;"></div>
+                </div>
+                <div class="col col-page-title col-item">
+                  <h1 class="page-title" id="pageTitleHeader" style="padding-left: 20px;">Socials Mall</h1>
+                </div>
+                <!-- col-item -->
+                <!--
+                              <div class="col-auto col-item">
+                                  <div class="d-dropdown">
+                                      <a class="btn" type="button" id="changeCurrencyDd">
+                                          <div class="icon c-2">
+                                              <i class="ri-notification-3-line"></i>
+                                          </div>
+                                          <div class="content">
+                                              <div class="title">
+                                                  <span>Updates</span>
+                                              </div>
+                                              <div class="info">
+                                                  See Service Updates
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </div> 
+                              </div> col-item -->
+                <div class="col-auto col-item">
+                  <div class="d-dropdown">
+                    <a href="{% url 'core:account' %}">
+                      <button class="btn" type="button" id="changeCurrencyDd">
+                        <div class="icon user-avatar">
+                          <img
+                            src="https://res.cloudinary.com/dsnmt7vn1/image/upload/v1670929805/famsup-image/users_avatar_vmgphf.png"
+                            alt="User Avatar"
+                          />
+                        </div>
+                        <div class="content">
+                          <div class="title">
+                            <span>@{{request.user.username}}</span>
+                            <i class="ri-checkbox-circle-line p-color"></i>
+                          </div>
+                          <div class="info d-flex align-items-center">
+                            See Dashboard
+                            <i class="ri-arrow-right-line ms-2"></i>
+                          </div>
+                        </div>
+                      </button>
+                    </a>
+                  </div>
+                  <!-- ./Updates -->
+                </div>
+                <!-- col-item -->
+              </div>
+            </div>
+          </div>
+  
+          <!-- ./d-header -->
+          <!-- Main variables *content* -->
+          <main class="app-content">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <div class="container-fluid p-0">
+                <div
+                  class="alert {{ message.tags }} alert-dismissible"
+                  role="alert"
+                >
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="True">&times;</span>
+                  </button>
+                  {{ message }}
+                </div>
+              </div>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </main>
+        </div>
+    </div>
+    <div id="mainbody">
+        <div id="imageHead">
+            <div id="imagediv">
+                <h3 id="paragraph1" class="headerStyle" style="color: whitesmoke;">Want to advertise your brand or business to a massive audience ?</h3>
+                <p id="paragraph2" class="headerStyle2"><a href="#" style="color: rgb(255, 255, 146)">click here</a> to know get started.</p>
+                <img src="{% static 'assets/images/woman.png' %}" id="image1">
+            </div>
+        </div>
+        <div id="section2">
+            <p class="writeup" style="padding-top: 10px;">Hello <b style="color: rgb(5, 177, 5);">{{request.user.username}}!</b> welcome Socials Mall!</p>
+            <div id="innerSection2">
+                <div class="uppersection2" style="margin-left: 0px;">
+                    <img>
+                    <div class="childsection2"style="width: 300px;" >
+                        <div class="icons">
+                            <i class="fas fa-gem" style="font-size: 30px; color: orangered; opacity: 0.7;"></i>
+                        </div>
+                        <!-- <img src="./woman.png" style="height: 50px; width: 50px;"  class="icons"> -->
+                        <div class="style3" style="width: 150px;">
+                            <p class="writeup" style="font-size: 20px; margin-bottom: 0px;">Account Status</p>
+                            <p class="writeupValue">NEW (Level 1)</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="uppersection2">
+                    <img>
+                    <div class="childsection2">
+                        <div class="icons">
+                            <i class="fas fa-shopping-cart" style="font-size: 30px; color: orangered; opacity: 0.7;"></i>
+                        </div>
+                        <!-- <img src="./woman.png" style="height: 50px; width: 50px;"  class="icons"> -->
+                        <div class="style3">
+                            <p class="writeup" style="font-size: 20px; margin-bottom: 0px;">Total Orders</p>
+                            <p class="writeupValue"style="color: white;">6435848</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="uppersection2">
+                    <img>
+                    <div class="childsection2">
+                        <div class="icons">
+                            <i class="fas fa-wallet" style="font-size: 30px; color: orangered; opacity: 0.7;"></i>
+                        </div>
+                        <!-- <img src="./woman.png" style="height: 50px; width: 50px;" class="icons"> -->
+                        <div class="style3">
+                            <p class="writeup" style="font-size: 20px; margin-bottom: 0px;">Balance</p>
+                            <p class="writeupValue" style="color: orangered;">NGN 0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="section3">
+            <div id="innersection3">
+                <div id="innersection3child">
+                <form method="POST">
+                    <div style="width: 100%;" class="adjustments">
+                        <input type="text" placeholder="Search" class="inputForms">
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <p class="writeup">Category</p>
+                        <select class="selectValue">
+                            <option value="service">Todays Latest Service</option>
+                        </select>
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <p class="writeup">Service</p>
+                        <select class="selectValue">
+                            <option value="service" selected>Instagram Followers [max : 1M] NGN 16,000 per 1000</option>
+                            <option value="apple">Apple</option>
+                            <option value="banana">Banana</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <p class="writeup">Link (Profile Link, Post Link)</p>
+                        <input type="text" class="inputForms">
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <p class="writeup">Quantity (How many followers, likes, comments, subscriptions or views)</p>
+                        <input type="text" class="inputForms">
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 115px;">
+                            <p class="writeup">Average Time</p>
+                            <i class="fas fa-info-circle" style="color: gray; padding-top: 2px;"></i>
+                        </div>
+                        <select class="selectValue" style="padding: 0px; background-color: rgb(13, 13, 13);">
+                            <option value="service">1 hour 30 mins</option>
+                        </select>
+                    </div>
+                    <div style="width: 100%;" class="adjustments">
+                        <p class="writeup">Charge</p>
+                        <input type="text" class="inputForms">
+                    </div>
+                    <div class="style2">
+                        <input type="submit" class="inputForms" style="background-color: orangered; width: 100%;  color: white;">
+                    </div>
+                </form>
+                </div>
+            </div>
+    
+            <div id="innersection3div">
+                <div id="innersection3" style="height: 60px; width: 100%;">
+                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 155px;">
+                        <i class="fas fa-info-circle" style="color: gray; padding-top: 5px;"></i>
+                        <p class="writeup" style="padding-top: 5px;">Service Description</p>
+                    </div>
+                </div>
+                <div id="innersection3" style="height: 660px; width: 100%; margin-top: 15px;">
+                    <div class="adjustments">
+                        <p class="writeup">Instagram Followers [max : 1M] NGN 16,000 per 1000</p>
+                    </div>
+                    <select class="selectValue" style="padding: 0px; background-color: rgb(13, 13, 13); margin-top: 5px;">
+                        <option value="service">1 hour 30 mins</option>
+                    </select>
+                    <div id="second-div">
+                        <input type="text" class="inputForms" placeholder="Start Time" id="specialstyling">
+                        <input type="text" class="inputForms" placeholder="Speed" id="specialstyling">
+                    </div>
+                    <div id="second-div">
+                        <input type="text" class="inputForms" placeholder="Guaranteed" id="specialstyling">
+                        <input type="text" class="inputForms" placeholder="Avg Time" id="specialstyling">
+                    </div>
+                    <div id="second-div2" style="background-color: rgb(13, 13, 13); height: 350px;">
+                        <p class="writeup" style="margin-bottom: 0px; padding-top: 7px;">Start Time 0.1 Hour (Mostly within 30 minutes) Speed 80,000 - 100,000 per day</p>
+                        <p class="writeup" style="margin-top: 0px;">----------------------------------------------------</p>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 255px;">
+                            <i class="fas fa-check" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Guaranteed 90 days Profill button</p>
+                        </div>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 208px;">
+                            <i class="fas fa-check" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Profill: 90 days with button</p>
+                        </div>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 94px;">
+                            <i class="fas fa-check" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Drop: 3.5%</p>
+                        </div>
+                        <br>
+                        <p class="writeup" style="margin-top: 0px;">----------------------------------------------------</p>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 160px;">
+                            <i class="fas fa-info-circle" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Drop Feed Disabled</p>
+                        </div>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 240px;">
+                            <i class="fas fa-info-circle" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Target Country Worldwide Only</p>
+                        </div>
+                        <p class="writeup" style="margin-top: 5px;">----------------------------------------------------</p>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 175px;">
+                            <i class="fas fa-info-circle" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Note: Always Working</p>
+                        </div>
+                        <div style="height: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 270px;">
+                            <i class="fas fa-arrow-right" style="color: gray; padding-top: 2px;"></i>
+                            <p class="writeup">Link Example: Username or Full link</p>
+                        </div>
+                        <p class="writeup" style="margin-top: 5px;">---------------------------------------------------</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-12">
+              <div class="footer_logo">
+                <img src="{% static 'images/logo3.png' %}" class="img-fluid" alt="">
+                <p>
+                  The Socials Mall is the Best SMM Panel With the Highest Quality Services On The Market. Look No
+                  Further
+                  Than The Socials Mall, The World's #1 Panel For all SMM Services.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+              <div class="links_wrap">
+                <h4>Useful Links</h4>
+                <div class="links">
+                  <a href="{% url 'core:index' %}">Home</a>
+                  <a href="{% url 'account:register' %}">Sign up</a>
+                  <a href="{% url 'core:userservices' %}">Services</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+              <div class="links_wrap">
+                <h4>Services</h4>
+                <div class="links">
+                  <a href="{% url 'core:dashboard' %}">Facebook Services</a>
+                  <a href="{% url 'core:dashboard' %}">Twitter Services</a>
+                  <a href="{% url 'core:dashboard' %}">Telegram Services</a>
+                  <a href="{% url 'core:dashboard' %}">Youtube Services</a>
+                  <a href="{% url 'core:dashboard' %}">Instagram Services</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- ./FOOTER -->
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+              <p>
+                &copy; Copyright 2023 Socials Mall LTD. All Rights Reserved.
+              </p>
+              <!--<p>-->
+              <!--  Address: No. 15 circular road E/W road port harcourt-->
+              <!--</p>-->
+              <!--<p>-->
+              <!--  Phone number: 07058089271-->
+              <!--</p>-->
+              <!--<p>-->
+              <!--  Email: innehanointed10@gmail.com-->
+              <!--</p>-->
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+    
+    {% include 'layouts/mobilenav.html' %}
+</div>
+
+<!-- My Script -->
+<script>
+  function toggleAccordion(clickedHeader) {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    const accordionContents = document.querySelectorAll(
+      '.accordion-content'
+    );
+
+    accordionHeaders.forEach((header) => {
+      if (header !== clickedHeader) {
+        header.classList.remove('active');
+      }
+    });
+
+    accordionContents.forEach((content) => {
+      if (content !== clickedHeader.nextElementSibling) {
+        content.style.display = 'none';
+      }
+    });
+
+    clickedHeader.classList.toggle('active');
+    const content = clickedHeader.nextElementSibling;
+    content.style.display =
+      content.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
+<script defer>
+  // Calculate the price based on the user-defined quantity and data attributes
+  function calculatePrice(quantityInput, pricePerK) {
+    const quantity = parseInt(quantityInput.value);
+    if (!isNaN(quantity) && !isNaN(pricePerK)) {
+      const totalPrice = (quantity / 1000) * pricePerK;
+      return totalPrice.toFixed(2);
+    }
+    return '';
+  }
+
+  function logSelectedServiceData(selectId) {
+    const selectService = document.getElementById(selectId);
+    const selectedOption =
+      selectService.options[selectService.selectedIndex];
+
+    if (selectedOption) {
+      const container = selectService.closest('.accordion-content');
+      const quantityInput = container.querySelector('#quantity');
+      const minInput = container.querySelector('#min');
+      const maxInput = container.querySelector('#max');
+      const serviceId = container.querySelector('#serviceid');
+      const serviceDescri = container.querySelector('#servicedescri');
+      const calculatedPrice = container.querySelector('#calculatedPrice');
+      const pricE = container.querySelector('#pricE');
+
+      // Check if the required input elements are found before setting their values
+      if (minInput)
+        minInput.value = selectedOption.getAttribute('data-min');
+      if (maxInput)
+        maxInput.value = selectedOption.getAttribute('data-max');
+      if (serviceId)
+        serviceId.value = selectedOption.getAttribute('data-serviceid');
+      if (serviceDescri)
+        serviceDescri.value = selectedOption.getAttribute(
+          'data-servicedescri'
+        );
+
+      // Calculate the price based on the user-defined quantity and data attributes
+      if (quantityInput && calculatedPrice) {
+        const pricePerK = parseFloat(
+          selectedOption.getAttribute('data-price_per_k')
+        );
+        const updatePrice = () => {
+          const price = calculatePrice(quantityInput, pricePerK);
+          // console.log(`₦${price}`);
+          calculatedPrice.textContent = `₦${price}`; // Update the span with the calculated price
+          pricE.value = price; // Update the price with the calculated price
+        };
+
+        quantityInput.addEventListener('input', updatePrice); // Calculate and update the price in real-time
+
+        // Calculate the price initially and display it
+        const initialPrice = calculatePrice(quantityInput, pricePerK);
+        calculatedPrice.textContent = `₦${initialPrice}`; // Display the initial calculated price
+        pricE.value = initialPrice;
+      }
+    }
+  }
+
+  // Add event listeners for the select options in all sections
+
+  const instagramSelect = document.getElementById('instagramService');
+  instagramSelect.addEventListener('change', function () {
+    logSelectedServiceData('instagramService');
+  });
+
+  const tiktokSelect = document.getElementById('tiktokService');
+  tiktokSelect.addEventListener('change', function () {
+    logSelectedServiceData('tiktokService');
+  });
+
+  const youtubeSelect = document.getElementById('youtubeService');
+  youtubeSelect.addEventListener('change', function () {
+    logSelectedServiceData('youtubeService');
+  });
+
+  const facebookSelect = document.getElementById('facebookService');
+  facebookSelect.addEventListener('change', function () {
+    logSelectedServiceData('facebookService');
+  });
+
+  const telegramSelect = document.getElementById('telegramService');
+  telegramSelect.addEventListener('change', function () {
+    logSelectedServiceData('telegramService');
+  });
+
+  const twitterSelect = document.getElementById('twitterService');
+  twitterSelect.addEventListener('change', function () {
+    logSelectedServiceData('twitterService');
+  });
+
+  const audiomackSelect = document.getElementById('audiomackService');
+  audiomackSelect.addEventListener('change', function () {
+    logSelectedServiceData('audiomackService');
+  });
+</script>
+
+<!-- My Script End -->
+
+<script
+  src="//code.tidio.co/vh097nkowxj4ldchs3cipszlnyr3ww24.js"
+  async
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/libs/jquery/1.12.4/jquery.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/global/aknio8ec1fpphc0p.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/global/nfos6j9mo1on7ksz.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/global/lq8ohp02z8rg6gg1.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/global/a2wrrjwy29x3cr2s.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/hj0v8i/ui3mumnxetcz5hl2.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.mypanel.link/hj0v8i/1fkio8uegwk8gm3h.js"
+></script>
+<script>
+var beamer_config = {
+    product_id : 'HIoQFNaK58134' //DO NOT CHANGE: This is your product code on Beamer
+};
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+<script type="text/javascript">
+  window.modules.layouts = {
+    theme_id: 1,
+    auth: 1,
+    live: true,
+    csrftoken:
+      'WR1XLrmmRULiHnn4cRCIU1tbHAMAYNyYEpdVit9Un1gBWhtZ-8UQDK9uIcEeV-YcFQRdOlAlpf5DpSHhlmzoFA==',
+  };
+</script>
+<script type="text/javascript"></script>
+
+<!-- Essientials Js -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
+
+<!-- swiper.js -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<script>
+  const serviceQuery = new URLSearchParams(window.location.search);
+  if (serviceQuery.get('service_id') !== null) {
+    const service_id = serviceQuery.get('service_id');
+    const services = window.modules.siteOrder.services;
+
+    const cat_id = services[service_id].cid;
+
+    var event = document.createEvent('HTMLEvents');
+
+    setTimeout(() => {
+      console.log(cat_id);
+      $('.select-option[data-value="' + cat_id + '"]').click();
+    }, 1000);
+
+    setTimeout(() => {
+      $('.select-option[data-value="' + service_id + '"]').click();
+
+      event.initEvent('change', true, false);
+      serviceSelect.dispatchEvent(event);
+    }, 1500);
+  }
+</script>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+  integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934647/js/main_fiiz64_cnjvz4.js"></script>
+
+<script src="https://res.cloudinary.com/dsnmt7vn1/raw/upload/v1670934737/js/howler_rqlpez_q5iapf.js"></script>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<script>
+  const testimonialComments = new Swiper('#testimonialComments', {
+    loop: true,
+    spaceBetween: 10,
+    slidesPerView: 1,
+    allowTouchMove: false,
+    autoHeight: true,
+  });
+  const testimonialMember = new Swiper('#testimonialMember', {
+    loop: true,
+    slidesPerView: 3,
+    slideToClickedSlide: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 3000,
+    },
+    breakpoints: {
+      740: {
+        slidesPerView: 5,
+      },
+    },
+    on: {
+      slideChange: function () {
+        testimonialComments.slideTo(this.realIndex + 1);
+      },
+    },
+  });
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
+  integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+  $('.slickSlider').slick({
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    arrows: false,
+    speed: 300,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ],
+  });
+</script>
+
+<!-- iboost static files -->
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/jquery-3.6.0.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/bootstrap.bundle.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/bootstrap-toggle.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/jquery.slimscroll.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/jquery.nice-select.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+<script
+  src="{% static 'assets/templates/basic/master/js/nicEdit.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/prism.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/vendor/select2.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+
+<script
+  src="{% static 'assets/templates/basic/master/js/app.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+<script
+  src="{% static 'assets/templates/basic//js/bootstrap-fileinput.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+<link
+  rel="stylesheet"
+  href="{% static 'assets/admin/css/iziToast.min.css' %}"
+/>
+<script
+  src="{% static 'assets/admin/js/iziToast.min.js' %}"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+<script type="0c2404225431003dc462fdb2-text/javascript">
+  "use strict";
+      function notify(status,message) {
+          iziToast[status]({
+              message: message,
+              position: "topRight"
+          });
+      }
+</script>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-211452243-1"
+  type="0c2404225431003dc462fdb2-text/javascript"
+></script>
+<script type="0c2404225431003dc462fdb2-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "UA-211452243-1");
+</script>
+<script type="0c2404225431003dc462fdb2-text/javascript">
+  (function($,document){
+      "use strict";
+      bkLib.onDomLoaded(function() {
+          $( ".nicEdit" ).each(function( index ) {
+              $(this).attr("id","nicEditor"+index);
+              new nicEditor({fullPanel : true}).panelInstance('nicEditor'+index,{hasPanel : true});
+          });
+      });
+      $( document ).on('mouseover ', '.nicEdit-main,.nicEdit-panelContain',function(){
+          $('.nicEdit-main').focus();
+      });
+  })(jQuery, document);
+</script>
+<script type="0c2404225431003dc462fdb2-text/javascript">
+  (function ($) {
+      "use strict";
+
+      $('.detailsBtn').on('click', function () {
+          var modal = $('#detailsModal');
+          var details = $(this).data('details');
+
+          modal.find('#details').html(details);
+          modal.modal('show');
+      });
+
+      $('.orderBtn').on('click', function () {
+          var modal = $('#orderModal');
+          var url = $(this).data('url');
+          var price_per_k = $(this).data('price_per_k');
+          var min = $(this).data('min');
+          var max = $(this).data('max');
+          var service = $(this).data('serviceid');
+          var servicedescri = $(this).data('servicedescri');
+          // console.log(url);
+          //Calculate total price
+          $(document).on("keyup", "#quantity", function() {
+              var quantity = $('#quantity').val()
+              var total_price = (price_per_k/1000)*quantity;
+              modal.find('input[name=price]').val("₦" + total_price.toFixed(2));
+          });
+
+          modal.find('form').attr('action', url);
+          modal.find('input[name=quantity]').attr('min', min).attr('max', max);
+          modal.find('input[name=min]').val(min);
+          modal.find('input[name=max]').val(max);
+          modal.find('input[name=serviceid]').val(service);
+          modal.find('input[name=servicedescri]').val(servicedescri);
+          modal.modal('show');
+      });
+
+      //Scroll to paginate position
+      var pathName = document.location.pathname;
+      window.onbeforeunload = function () {
+          var scrollPosition = $(document).scrollTop();
+          sessionStorage.setItem("scrollPosition_" + pathName, scrollPosition.toString());
+      }
+      if (sessionStorage["scrollPosition_" + pathName]) {
+          $(document).scrollTop(sessionStorage.getItem("scrollPosition_" + pathName));
+      }
+  })(jQuery);
+</script>
+<script
+  type="0c2404225431003dc462fdb2-text/javascript"
+  src="https://apiv2.popupsmart.com/api/Bundle/382489"
+  async
+></script>
+<script
+  src="{% static 'cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js' %}"
+  data-cf-settings="0c2404225431003dc462fdb2-|49"
+  defer=""
+></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+  crossorigin="anonymous"
+></script>
+<!-- iboost static files -->
+</body>
+</html>
