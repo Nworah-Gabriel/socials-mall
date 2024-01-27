@@ -6,6 +6,8 @@ app_name = "core"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("formview/<str:parent_id>", views.formview, name="formview"),
+    path("select_service/<str:service>", views.service_select, name="service_select"),
     path("faq/", views.faq, name="faq"),
     path("services/", views.services, name="services"),
     path("user/services/", views.userServices, name="userservices"),

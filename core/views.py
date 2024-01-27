@@ -27,6 +27,7 @@ from coinbase_commerce.client import Client
 from decimal import Decimal
 import hashlib
 import hmac
+from django.http import JsonResponse
 # Create your views here.
 
 flutterWavePublicKey = settings.FLUTTER_API_PUBLIC_KEY
@@ -62,6 +63,115 @@ def services(request):
 def faq(request):
     return render(request, "faq.html")
 
+def service_select(request, service):
+    if service == "facebookService":
+        print(service)
+        try:
+            facebookService = FacebookService.objects.all()
+            data = [{'name': obj.service} for obj in facebookService]
+            return JsonResponse({'objects':data})
+        except:
+            return HttpResponse("none")
+
+    if service == "instagramService":
+        try:
+            instagramService = InstagramService.objects.all()
+            data = [{'name': obj.service} for obj in instagramService]
+            return JsonResponse({'objects':data})
+        except:
+            return HttpResponse("none")
+    if service == "instagramService":
+        try:
+            telegramService = TelegramService.objects.all()
+            data = [{'name': obj.service} for obj in telegramService]
+            return JsonResponse({'objects':data})
+        except:
+            return HttpResponse("none")
+    if service == "youtubeService":
+            try:
+                youtubeService = YoutubeService.objects.all()
+                data = [{'name': obj.service} for obj in youtubeService]
+                return JsonResponse({'objects':data})
+            except:
+                return HttpResponse("none")
+    if service == "tiktokService":
+        try:
+            tiktokService = TiktokService.objects.all()
+            data = [{'name': obj.service} for obj in tiktokService]
+            return JsonResponse({'objects':data})
+           
+        except:
+            return HttpResponse("none")
+    if service == "twitterService":
+        try:
+            twitterService = Twitter.objects.all()
+            data = [{'name': obj.service} for obj in twitterService]
+            return JsonResponse({'objects':data})
+        except:
+            return HttpResponse("none")
+    if service == "audiomackService":
+        try:
+            audiomackService = AudioMack.objects.all()
+            data = [{'name': obj.service} for obj in audiomackService]
+            return JsonResponse({'objects':data})
+        except:
+            return HttpResponse("none")
+
+
+def formview(request, parent_id):
+    # service = request.Get.get('parent_id')
+    try:
+        facebookService = FacebookService.objects.get(service=parent_id)
+        print(facebookService)
+        return JsonResponse({
+            "price":"₦" + str(facebookService.price_per_k),
+            "quantity": facebookService.maximum,
+            "service": facebookService.service})
+    except:
+        try:
+            instagramService = InstagramService.objects.get(service=parent_id)
+            return JsonResponse({
+            "price":"₦" + str(instagramService.price_per_k),
+            "quantity": instagramService.maximum,
+            "service": instagramService.service})
+        except:
+            try:
+                telegramService = TelegramService.objects.get(service=parent_id)
+                return JsonResponse({
+                    "price":"₦" + str(telegramService.price_per_k),
+                    "quantity": telegramService.maximum,
+                    "service": instagramService.service})
+            except:
+                try:
+                    youtubeService = YoutubeService.objects.get(service=parent_id)
+                    return JsonResponse({
+                    "price":"₦" + str(youtubeService.price_per_k),
+                    "quantity": youtubeService.maximum,
+                    "service": youtubeService.service})
+                except:
+                    try:
+                        tiktokService = TiktokService.objects.get(service=parent_id)
+                        return JsonResponse({
+                            "price":"₦" + str(tiktokService.price_per_k),
+                            "quantity": tiktokService.maximum,
+                            "service": tiktokService.service})
+                    except:
+                        try:
+                            twitterService = Twitter.objects.get(service=parent_id)
+                            return JsonResponse({
+                            "price":"₦" + str(twitterService.price_per_k),
+                            "quantity": twitterService.maximum,
+                            "service": twitterService.service})
+                        except:
+                            try:
+                                audiomackService = AudioMack.objects.get(service=parent_id)
+                                return JsonResponse({
+                                "price":"₦" + str(audiomackService.price_per_k),
+                                "quantity": audiomackService.maximum,
+                                "service": audiomackService.service})
+                            except:
+                                    return HttpResponse("none")
+
 @login_required(login_url="core:index")
 def dashboard(request):
     orders = Order.objects.all().count()
@@ -73,6 +183,15 @@ def dashboard(request):
     twitterService = Twitter.objects.all()
     audiomackService = AudioMack.objects.all()
 
+    service = [
+        facebookService,
+        instagramService,
+        telegramService,
+        youtubeService,
+        tiktokService,
+        twitterService,
+        audiomackService
+        ]
 
     userid = request.user.id
     user = User.objects.get(id=userid)
@@ -152,6 +271,7 @@ def dashboard(request):
         "tiktokService": tiktokService,
         "twitterService": twitterService,
         "audiomackService": audiomackService,
+        "services": service,
         "orders": orders,
         "page": "dashboard"
     }

@@ -294,44 +294,111 @@
             <div id="innersection3">
                 <div id="innersection3child">
                 <form method="POST">
+                    {% csrf_token %}
                     <div style="width: 100%;" class="adjustments">
                         <input type="text" placeholder="Search" class="inputForms">
                     </div>
+                    
                     <div style="width: 100%;" class="adjustments">
                         <p class="writeup">Category</p>
-                        <select class="selectValue">
-                            <option value="service">Todays Latest Service</option>
+                        <select class="selectValue" id="valueSelect">
+                            <option value="default">Todays Latest Service</option>
+                            <option value="facebookService">facebookService</option>
+                            <option value="instagramService">instagramService</option>
+                            <option value="telegramService">telegramService</option>
+                            <option value="youtubeService">youtubeService</option>
+                            <option value="tiktokService">tiktokService</option>
+                            <option value="twitterService">twitterService</option>
+                            <option value="audiomackService"> audiomackService</option>
                         </select>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $('#valueSelect').change(function () {
+                                    var parentId = $(this).val();
+                                    console.log(parentId);
+                                    $.ajax(
+                                        {
+                                            url: '/select_service/' + parentId,
+                                            type: 'GET',
+                                            // data: {'parent_id': parentId},
+                                            success: function (data){
+                                                $('#serviceid').empty();
+                                                data.objects.forEach(function (obj){
+                                                    $('#serviceid').append('<option>' + obj.name + '</option>');
+                                                })
+                                                // $('#quantity').val(data.quantity);
+                                                // $('#quantityoutput').html(data.quantity);
+
+                                                console.log(data)
+                                            },
+                                            error: function(error){
+                                                console.error("error fetching data", error);
+                                            }
+                                        }
+                                    )
+                                })
+                            })
+                        </script>
                     </div>
                     <div style="width: 100%;" class="adjustments">
                         <p class="writeup">Service</p>
-                        <select class="selectValue">
-                            <option value="service" selected>Instagram Followers [max : 1M] NGN 16,000 per 1000</option>
-                            <option value="apple">Instagram Followers [max : 1M] NGN 16,000 per 1000</option>
-                            <option value="banana">Instagram Followers [max : 2M] NGN 32,000 per 2000</option>
-                            <option value="orange">Instagram Followers [max : 3M] NGN 48,000 per 3000</option>
+                        <select class="selectValue" id="serviceid" name="serviceid">
+                            <!-- <option value="service" selected>Instagram Followers [max : 1M] NGN 16,000 per 1000</option> -->
                         </select>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $('#serviceid').change(function () {
+                                    var parentId = $(this).val();
+                                    $.ajax(
+                                        {
+                                            url: '/formview/' + parentId,
+                                            type: 'GET',
+                                            // data: {'parent_id': parentId},
+                                            success: function (data){
+                                                $('#Charge').empty();
+                                                $('#quantity').empty();
+                                                $('#quantityoutput').empty();
+                                                $('#Charge').html(data.price);
+                                                $('#quantity').val(data.quantity);
+                                                $('#quantityoutput').html(data.quantity);
+                                                $('#serviceDisplay').html(data.service);
+
+                                                // console.log(data)
+                                            },
+                                            error: function(error){
+                                                console.error("error fetching data", error);
+                                            }
+                                        }
+                                    )
+                                })
+                            })
+                        </script>
                     </div>
                     <div style="width: 100%;" class="adjustments">
                         <p class="writeup">Link (Profile Link, Post Link)</p>
-                        <input type="text" class="inputForms">
+                        <input type="text" class="inputForms" name="link" style="color: white;">
                     </div>
                     <div style="width: 100%;" class="adjustments">
-                        <p class="writeup">Quantity (How many followers, likes, comments, subscriptions or views)</p>
-                        <input type="text" class="inputForms">
+                        <p class="writeup">Quantity</p>
+                        <input type="text" class="inputForms" id="quantity" name="quantity">
+                        <p class="writeup" id="quantityoutput"style="position:absolute; margin-top:-25px; margin-left:10px; color:rgb(92, 92, 92);"></p>
                     </div>
                     <div style="width: 100%;" class="adjustments">
                         <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 115px;">
                             <p class="writeup">Average Time</p>
                             <i class="fas fa-info-circle" style="color: gray; padding-top: 2px;"></i>
                         </div>
-                        <select class="selectValue" style="padding: 0px; background-color: rgb(13, 13, 13);">
+                        <select name="servicedescri" class="selectValue" style="padding: 0px; background-color: rgb(13, 13, 13);">
                             <option value="service">1 hour 30 mins</option>
                         </select>
                     </div>
                     <div style="width: 100%;" class="adjustments">
                         <p class="writeup">Charge</p>
-                        <input type="text" class="inputForms">
+                        <select class="selectValue" style="padding-left: 0px;" name="price">
+                            <option id="Charge"></option>
+                        </select>
                     </div>
                     <div class="style2">
                         <input type="submit" class="inputForms" style="background-color: orangered; width: 100%;  color: white;">
@@ -349,7 +416,7 @@
                 </div>
                 <div id="innersection3" style="height: 660px; width: 100%; margin-top: 15px;">
                     <div class="adjustments">
-                        <p class="writeup">Instagram Followers [max : 1M] NGN 16,000 per 1000</p>
+                        <p class="writeup" id="serviceDisplay">Followers [max : 0M]</p>
                     </div>
                     <select class="selectValue" style="padding: 0px; background-color: rgb(13, 13, 13); margin-top: 5px;">
                         <option value="service">1 hour 30 mins</option>
