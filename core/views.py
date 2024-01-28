@@ -124,51 +124,65 @@ def formview(request, parent_id):
         facebookService = FacebookService.objects.get(service=parent_id)
         print(facebookService)
         return JsonResponse({
-            "price":"₦" + str(facebookService.price_per_k),
-            "quantity": facebookService.maximum,
-            "service": facebookService.service})
+            "price":facebookService.price_per_k,
+            "quantity": facebookService.minimum,
+            "maxvalue": facebookService.maximum,
+            "service": facebookService.service,
+            "id": facebookService.service_id})
     except:
         try:
             instagramService = InstagramService.objects.get(service=parent_id)
             return JsonResponse({
-            "price":"₦" + str(instagramService.price_per_k),
-            "quantity": instagramService.maximum,
-            "service": instagramService.service})
+            "price": instagramService.price_per_k,
+            "quantity": instagramService.minimum,
+            "maxvalue": instagramService.maximum,
+            "service": instagramService.service,
+            "id": instagramService.service_id})
         except:
             try:
                 telegramService = TelegramService.objects.get(service=parent_id)
                 return JsonResponse({
-                    "price":"₦" + str(telegramService.price_per_k),
-                    "quantity": telegramService.maximum,
-                    "service": instagramService.service})
+                    "price":telegramService.price_per_k,
+                    "quantity": telegramService.minimum,
+                    "maxvalue": telegramService.maximum,
+                    "service": instagramService.service,
+                    "id": telegramService.service_id})
             except:
                 try:
                     youtubeService = YoutubeService.objects.get(service=parent_id)
                     return JsonResponse({
-                    "price":"₦" + str(youtubeService.price_per_k),
-                    "quantity": youtubeService.maximum,
-                    "service": youtubeService.service})
+                    "price":youtubeService.price_per_k,
+                    "quantity": youtubeService.minimum,
+                    "maxvalue": youtubeService.maximum,
+                    "service": youtubeService.service,
+                    "id": youtubeService.service_id})
                 except:
                     try:
                         tiktokService = TiktokService.objects.get(service=parent_id)
                         return JsonResponse({
-                            "price":"₦" + str(tiktokService.price_per_k),
-                            "quantity": tiktokService.maximum,
-                            "service": tiktokService.service})
+                            "price":tiktokService.price_per_k,
+                            "quantity": tiktokService.minimum,
+                            "maxvalue": tiktokService.maximum,
+                            "service": tiktokService.service,
+                            "id": tiktokService.service_id})
                     except:
                         try:
                             twitterService = Twitter.objects.get(service=parent_id)
                             return JsonResponse({
-                            "price":"₦" + str(twitterService.price_per_k),
-                            "quantity": twitterService.maximum,
-                            "service": twitterService.service})
+                            "price": twitterService.price_per_k,
+                            "quantity": twitterService.minimum,
+                            "maxvalue": twitterService.maximum,
+                            "service": twitterService.service,
+                            "id": twitterService.service_id})
                         except:
                             try:
                                 audiomackService = AudioMack.objects.get(service=parent_id)
                                 return JsonResponse({
-                                "price":"₦" + str(audiomackService.price_per_k),
-                                "quantity": audiomackService.maximum,
-                                "service": audiomackService.service})
+                                "price":audiomackService.price_per_k,
+                                "quantity": audiomackService.minimum,
+                                "maxvalue": audiomackService.maximum,
+                                "service": audiomackService.service,
+                                "id": audiomackService.service_id})
                             except:
                                     return HttpResponse("none")
 
