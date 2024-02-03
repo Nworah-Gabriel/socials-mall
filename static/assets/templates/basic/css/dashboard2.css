@@ -214,7 +214,7 @@
 
 @media (max-width: 850px) {
     #mainbody{
-        margin-top: -190%;
+        /* margin-top: -190%; */
     }
     body{
         background-color: rgb(12, 6, 22);
@@ -225,7 +225,7 @@
         background-size: cover;
         height: 185px;
         margin: 20px;
-        margin-top: 80px;
+        margin-top: 20px;
         margin-right: 20px;
         border-radius: 25px;
         padding: 30px;
