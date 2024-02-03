@@ -9,7 +9,7 @@
         /* background-color: orangered; */
         background-image: url('../../../images/purple\ background.jpg');
         background-size: cover;
-        height: 100px;
+        height: 200px;
         margin: 20px;
         /* margin-top: 80px; */
         margin-right: 20px;
@@ -78,11 +78,11 @@
         margin-top: 0px;
     }
     #image1{
-        height: 0px;
-        width: 0px;
-        /* position: absolute;
+        height: 250px;
+        width: 310px;
+        position: absolute;
         right: 0;
-        top: 135px; */
+        top: 135px;
     }
     /* #imageHead{
         /* height: 400px; */
@@ -223,7 +223,7 @@
         /* background-color: orangered; */
         background-image: url('../../../images/purple\ background.jpg');
         background-size: cover;
-        height: 285px;
+        height: 185px;
         margin: 20px;
         margin-top: 80px;
         margin-right: 20px;
@@ -296,11 +296,11 @@
         margin-top: 0px;
     }
     #image1{
-        height: 130px;
-        width: 190px;
-        position: absolute;
+        height: 0px;
+        width: 0px;
+        /* position: absolute;
         right: 35px;
-        bottom: 255px;
+        bottom: 255px; */
     }
     #imageHead{
         /* height: 400px; */
