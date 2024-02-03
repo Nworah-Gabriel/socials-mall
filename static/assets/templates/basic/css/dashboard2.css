@@ -9,7 +9,7 @@
         /* background-color: orangered; */
         background-image: url('../../../images/purple\ background.jpg');
         background-size: cover;
-        height: 200px;
+        height: 100px;
         margin: 20px;
         /* margin-top: 80px; */
         margin-right: 20px;
@@ -78,11 +78,11 @@
         margin-top: 0px;
     }
     #image1{
-        height: 250px;
-        width: 310px;
-        position: absolute;
+        height: 0;
+        width: 0;
+        /* position: absolute;
         right: 0;
-        top: 135px;
+        top: 135px; */
     }
     /* #imageHead{
         /* height: 400px; */
