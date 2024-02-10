@@ -2512,7 +2512,12 @@
   box-shadow: 10px 7px 9px 5px gray;
 
   }
-
+  @media (max-width:800px) {
+  #rowDiv{
+    margin-bottom: 100px;
+  }
+  
+}
   </style>
 
 </head>
@@ -2527,7 +2532,7 @@
       </li>
     </ul>
   </nav>
-  <div class="row">
+  <div class="row" id="rowDiv">
     {% for i in categories %}
     <div class="col-sm-6 col-md-6 col-lg-4 mt-4 mt-md-3">
       <div class="basic-drop-shadow p-3 shadow-showcase">
