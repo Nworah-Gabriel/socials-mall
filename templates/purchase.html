@@ -279,7 +279,40 @@
                     <label class="title">Quantity to buy:</label>
                     <input type="number" id="quantity" name="quantity" min="1" class="form-control form-control-solid" placeholder="Qty" required >
                 </div>
-                <div class="mb-3 text-center" style="font-size: 20px;">Price per account: <b id="total" style="color:red;">₦{{category.price}}</b></div>
+                <script>
+                  var price_per_k;
+                  var maxval;
+
+                  $(document).ready(function() {
+                      var parentId = $('#name').val();
+                        $.ajax(
+                        {
+                          url: '/formview/' + parentId,
+                          type: 'GET',
+                          // data: {'parent_id': parentId},
+                          success: function (data){
+                          price_per_k = data.price;
+                          maxval = data.maxvalue;
+                          },
+                          error: function(error){
+                            console.error("error fetching data", error);
+                          }
+                        }
+                      );
+                    })
+                  $(document).ready(function() {
+                                $('#quantity').on( 'input', function () {
+                                  var value = $(this).val();
+                                  if (value > maxval){
+                                    $(this).val(maxval);
+                                  }
+                                    var quantity = $(this).val();                                    
+                                    var price = quantity * price_per_k;
+                                    $('#total').html(price);
+                                })
+                            })
+                </script>
+                <div class="mb-3 text-center" style="font-size: 20px;">Price: <b id="" style="color:red;">₦</b><b id="total" style="color:red;">{{category.price}}</b></div>
                 <div class="text-center mb-3" style="display: flex; flex-direction: row; justify-content: center;">
                     <button type="submit" id="btnBuy"  class="btn btn-primary btn-block" style="background-color: #6b349c; margin-top: 30px; color: white;"><i class="fas fa-credit-card mr-1" style="color: white;"></i> Pay</button>
                 </div>

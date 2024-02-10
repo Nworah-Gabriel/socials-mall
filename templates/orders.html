@@ -115,6 +115,11 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous"
   />
+  <style>
+    body{
+        background-color:rgb(12, 6, 22);
+    }
+  </style>
 </head>
 
 <body>
@@ -132,7 +137,7 @@
                             <div style="width:56px;"></div>
                         </div>
                         <div class="col col-page-title col-item">
-                            <h1 class="page-title" id="pageTitleHeader">Socials Mall</h1>
+                            <h1 class="page-title" id="pageTitleHeader"style="margin-left: 10px;">Socials Mall</h1>
                         </div>
                         <!-- col-item -->
                         <!--
@@ -197,8 +202,15 @@
 
                     <section class="op-orders-wrapper">
 
-
+                        {% if not orders %}
+                            <div style="display: flex; flex-direction: row; justify-content: center; border: none; color: white;">
+                                <h3>You have no orders!</h3>
+                            </div>
+                        {% endif %}
+                        
+                        {% if orders %}
                         <div class="card card-border op-card" data-is-open="false">
+
                             {% for i in orders %}
                             <div class="card-body">
                                 <div class="op-card--top">
@@ -244,6 +256,7 @@
                             </div>
                             {% endfor %}
                         </div>
+                        {% endif %}
                
 
                     </section>

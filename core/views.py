@@ -184,6 +184,13 @@ def formview(request, parent_id):
                                 "service": audiomackService.service,
                                 "id": audiomackService.service_id})
                             except:
+                                try:
+                                    category = Category.objects.get(name=str(parent_id))
+                                    print(category)
+                                    return JsonResponse({
+                                        "price":category.price,
+                                    })
+                                except:
                                     return HttpResponse("none")
 
 @login_required(login_url="core:index")
