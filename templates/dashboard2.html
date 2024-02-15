@@ -437,7 +437,7 @@
                                   }
                                     var quantity = $(this).val();                                    
                                     var price = (quantity/ 1000) * price_per_k;
-                                    $('#Charge').html(price);
+                                    $('#Charge').html(price.toFixed(2));
                                 })
                             })
                         </script>
